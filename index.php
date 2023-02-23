@@ -31,6 +31,7 @@
 			<a class="navbar-brand" href="view.php">View</a>
 		</div>
 	</nav>
+
 	<div class="container mt-4 text-center">
 		<?php if (isset($_GET['error'])) : ?>
 			<div class="alert alert-danger" role="alert">

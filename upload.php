@@ -32,6 +32,44 @@ if (isset($_POST['submit']) && isset($_FILES['my_image'])) {
 				$sql = "INSERT INTO images(image_url) 
 				        VALUES('$new_img_name')";
 				mysqli_query($conn, $sql);
+
+				$token = "xiabaCrqpUYR4Z7iQ3GJ1YCDKea7AwRgCvtG4GjJNRO"; // LINE Token
+				//Message
+				$mymessage = "\nเรื่อง: แจ้งเตือน 😀\n"; //Set new line with '\n'
+				$mymessage .= "จาก: 🖥 ระบบฝากไฟล์ 🖥\n";
+				$mymessage .= "รายละเอียด: มีการฝากไฟล์เพิ่มเข้ามาในระบบ";
+				$mymessage .= "ชื่อไฟล์: " . $new_img_name;
+				$imageFile = new CURLFILE(str_replace("upload.php","uploads/" . $new_img_name,$_SERVER['SCRIPT_FILENAME'])); // Local Image file Path
+				// $imageFile ='uploads/' . $new_img_name; // Local Image file Path
+				$sticker_package_id = '2';  // Package ID sticker
+				$sticker_id = '34';    // ID sticker
+				$data = array(
+					'message' => $mymessage,
+					'imageFile' => $imageFile
+				);
+				$chOne = curl_init();
+				curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+				curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+				curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+				curl_setopt($chOne, CURLOPT_POST, 1);
+				curl_setopt($chOne, CURLOPT_POSTFIELDS, $data);
+				curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+				$headers = array('Method: POST', 'Content-type: multipart/form-data', 'Authorization: Bearer ' . $token,);
+				curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+				curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+				$result = curl_exec($chOne);
+				//Check error
+				if (curl_error($chOne)) {
+					echo 'error:' . curl_error($chOne);
+				} else {
+					$result_ = json_decode($result, true);
+					echo "status : " . $result_['status'];
+					echo "message : " . $result_['message'];
+					echo str_replace("upload.php","uploads/" . $new_img_name,$_SERVER['SCRIPT_FILENAME']);
+				}
+				//Close connection
+				curl_close($chOne);
+
 				header("Location: view.php");
 			} else {
 				$em = "You can't upload files of this type";
