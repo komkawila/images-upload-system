@@ -64,7 +64,8 @@ if (isset($_GET["filename"])) {
 							<td><?= $images['id'] ?></td>
 							<td><img src="uploads/<?= $images['image_url'] ?>" width="100" /></td>
 							<td><?= $images['image_url'] ?></td>
-							<td><?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+							<td><?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . "/uploads/" . $images['image_url'];
+							// <td><?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 								?></td>
 							<form action="view.php" method="GET">
 								<td><button class="btn btn-danger mt-2" name="filename" value="<?= $images['image_url'] ?>">ลบ</button></td>
