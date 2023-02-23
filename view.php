@@ -1,7 +1,7 @@
 <?php include "db_conn.php"; ?>
 <!DOCTYPE html>
 <html>
-<?php
+<!-- <?php
 if (isset($_GET["filename"])) {
 	include "db_conn.php";
 	// DELETE FROM images WHERE id = 11"?
@@ -16,7 +16,7 @@ if (isset($_GET["filename"])) {
 	header("location: view.php");
 	exit(0);
 }
-?>
+?> -->
 
 <head>
 	<title>View</title>
