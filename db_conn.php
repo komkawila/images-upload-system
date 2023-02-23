@@ -1,10 +1,10 @@
 <?php  
 
 $sname = "localhost";
-$uname = "root";
-$password = "12345678";
-// $uname = "komkawila";
-// $password = "Kkomprwm20_1111";
+// $uname = "root";
+// $password = "12345678";
+$uname = "komkawila";
+$password = "Kkomprwm20_1111";
 
 $db_name = "images_db";
 
